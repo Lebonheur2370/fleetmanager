@@ -45,6 +45,8 @@ class VehiculeController extends Controller
     public function show(Vehicule $vehicule)
     {
         $vehicule->load('affectationActive.chauffeur');
+        $vehicule->loadCount('entretiens');
+        $vehicule->setRelation('entretiensRecents', $vehicule->entretiens()->latest('date_entretien')->take(5)->get());
 
         return view('vehicules.show', compact('vehicule'));
     }
