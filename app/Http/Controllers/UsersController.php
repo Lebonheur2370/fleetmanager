@@ -80,7 +80,7 @@ class UsersController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
-        return redirect()->route('login')->with('success', "Vous avez été déconnecté.");
+        return redirect()->route('login')->with('success', 'Vous avez été déconnecté.');
     }
 
     /**
@@ -111,7 +111,7 @@ class UsersController extends Controller
             'email' => $request->email,
         ]);
 
-        return redirect()->route('users.index')->with('success', "Compte mis à jour.");
+        return redirect()->route('users.index')->with('success', 'Compte mis à jour.');
     }
 
     /**
@@ -121,6 +121,6 @@ class UsersController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('users.index')->with('success', "Compte supprimé.");
+        return redirect()->route('users.index')->with('success', 'Compte supprimé.');
     }
 }

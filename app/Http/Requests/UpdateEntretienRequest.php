@@ -29,11 +29,11 @@ class UpdateEntretienRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'vehicule_id.required' => "Veuillez sélectionner un véhicule.",
+            'vehicule_id.required' => 'Veuillez sélectionner un véhicule.',
             'type.required' => "Le type d'entretien est obligatoire.",
             'date_entretien.required' => "La date de l'entretien est obligatoire.",
-            'kilometrage.required' => "Le kilométrage est obligatoire.",
-            'prochain_kilometrage_seuil.gt' => "Le seuil du prochain entretien doit être supérieur au kilométrage actuel.",
+            'kilometrage.required' => 'Le kilométrage est obligatoire.',
+            'prochain_kilometrage_seuil.gt' => 'Le seuil du prochain entretien doit être supérieur au kilométrage actuel.',
             'prochaine_date_prevue.after' => "La prochaine date prévue doit être postérieure à la date de l'entretien.",
         ];
     }

@@ -30,11 +30,11 @@ class StoreChauffeurRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'nom.required' => "Le nom est obligatoire.",
-            'prenom.required' => "Le prénom est obligatoire.",
-            'numero_permis.required' => "Le numéro de permis est obligatoire.",
-            'numero_permis.unique' => "Ce numéro de permis est déjà enregistré.",
-            'telephone.required' => "Le numéro de téléphone est obligatoire.",
+            'nom.required' => 'Le nom est obligatoire.',
+            'prenom.required' => 'Le prénom est obligatoire.',
+            'numero_permis.required' => 'Le numéro de permis est obligatoire.',
+            'numero_permis.unique' => 'Ce numéro de permis est déjà enregistré.',
+            'telephone.required' => 'Le numéro de téléphone est obligatoire.',
         ];
     }
 }

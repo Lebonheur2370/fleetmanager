@@ -31,10 +31,10 @@ class StoreAffectationRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'vehicule_id.required' => "Veuillez sélectionner un véhicule.",
-            'chauffeur_id.required' => "Veuillez sélectionner un chauffeur.",
-            'date_debut.required' => "La date de début est obligatoire.",
-            'date_fin.after' => "La date de fin doit être postérieure à la date de début.",
+            'vehicule_id.required' => 'Veuillez sélectionner un véhicule.',
+            'chauffeur_id.required' => 'Veuillez sélectionner un chauffeur.',
+            'date_debut.required' => 'La date de début est obligatoire.',
+            'date_fin.after' => 'La date de fin doit être postérieure à la date de début.',
         ];
     }
 
@@ -49,12 +49,12 @@ class StoreAffectationRequest extends FormRequest
         $validator->after(function ($validator) {
             if ($this->filled('vehicule_id') && Affectation::where('vehicule_id', $this->vehicule_id)
                 ->where('statut', 'active')->exists()) {
-                $validator->errors()->add('vehicule_id', "Ce véhicule est déjà affecté sur une période en cours.");
+                $validator->errors()->add('vehicule_id', 'Ce véhicule est déjà affecté sur une période en cours.');
             }
 
             if ($this->filled('chauffeur_id') && Affectation::where('chauffeur_id', $this->chauffeur_id)
                 ->where('statut', 'active')->exists()) {
-                $validator->errors()->add('chauffeur_id', "Ce chauffeur est déjà affecté sur une période en cours.");
+                $validator->errors()->add('chauffeur_id', 'Ce chauffeur est déjà affecté sur une période en cours.');
             }
         });
     }

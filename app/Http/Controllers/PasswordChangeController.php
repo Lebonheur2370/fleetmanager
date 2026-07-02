@@ -30,6 +30,6 @@ class PasswordChangeController extends Controller
             'doit_changer_mot_de_passe' => false,
         ]);
 
-        return redirect()->route('dashboard')->with('success', "Mot de passe mis à jour.");
+        return redirect()->route('dashboard')->with('success', 'Mot de passe mis à jour.');
     }
 }

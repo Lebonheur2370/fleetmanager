@@ -12,7 +12,7 @@ class VerifierAlertesEntretiens extends Command
 {
     protected $signature = 'entretiens:verifier-alertes';
 
-    protected $description = "US10 — Vérifie chaque véhicule par rapport au seuil kilométrique / à la date "
+    protected $description = 'US10 — Vérifie chaque véhicule par rapport au seuil kilométrique / à la date '
         ."d'entretien prévue, et notifie les gestionnaires (email + notification en base) en cas d'échéance imminente ou dépassée.";
 
     public function handle(): int

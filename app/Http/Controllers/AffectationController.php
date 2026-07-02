@@ -94,7 +94,7 @@ class AffectationController extends Controller
     public function cloturer(Affectation $affectation)
     {
         if ($affectation->statut !== 'active') {
-            return back()->with('error', "Cette affectation est déjà clôturée.");
+            return back()->with('error', 'Cette affectation est déjà clôturée.');
         }
 
         DB::transaction(function () use ($affectation) {
@@ -136,7 +136,7 @@ class AffectationController extends Controller
 
         $callback = function () use ($affectations) {
             $handle = fopen('php://output', 'w');
-            fputs($handle, "\xEF\xBB\xBF"); // BOM UTF-8 pour une ouverture correcte dans Excel
+            fwrite($handle, "\xEF\xBB\xBF"); // BOM UTF-8 pour une ouverture correcte dans Excel
             fputcsv($handle, ['Véhicule', 'Chauffeur', 'Date début', 'Date fin', 'Statut', 'Motif'], ';');
 
             foreach ($affectations as $affectation) {

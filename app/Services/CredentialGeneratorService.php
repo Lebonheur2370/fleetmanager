@@ -29,7 +29,7 @@ class CredentialGeneratorService
         return [
             'matricule' => "CHF-{$numeroFormate}",
             'login' => strtolower("{$prenomSlug}.{$nomSlug}{$numero}@{$domaine}"),
-            'password' => ucfirst(strtolower($prenomSlug)) . ucfirst(strtolower($nomSlug)) . $numero,
+            'password' => ucfirst(strtolower($prenomSlug)).ucfirst(strtolower($nomSlug)).$numero,
         ];
     }
 

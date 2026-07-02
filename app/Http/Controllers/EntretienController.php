@@ -6,6 +6,7 @@ use App\Http\Requests\StoreEntretienRequest;
 use App\Http\Requests\UpdateEntretienRequest;
 use App\Models\Entretien;
 use App\Models\Vehicule;
+use Carbon\Carbon;
 
 class EntretienController extends Controller
 {
@@ -86,7 +87,7 @@ class EntretienController extends Controller
         }
 
         if (empty($data['prochaine_date_prevue']) && ! empty($config['intervalle_jours'])) {
-            $data['prochaine_date_prevue'] = \Carbon\Carbon::parse($data['date_entretien'])
+            $data['prochaine_date_prevue'] = Carbon::parse($data['date_entretien'])
                 ->addDays($config['intervalle_jours'])
                 ->toDateString();
         }

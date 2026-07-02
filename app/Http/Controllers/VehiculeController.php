@@ -36,7 +36,7 @@ class VehiculeController extends Controller
         Vehicule::create($request->validated());
 
         return redirect()->route('vehicules.index')
-            ->with('success', "Le véhicule a été ajouté à la liste.");
+            ->with('success', 'Le véhicule a été ajouté à la liste.');
     }
 
     /**
@@ -67,7 +67,7 @@ class VehiculeController extends Controller
         $vehicule->update($request->validated());
 
         return redirect()->route('vehicules.index')
-            ->with('success', "Les informations du véhicule ont été mises à jour.");
+            ->with('success', 'Les informations du véhicule ont été mises à jour.');
     }
 
     /**

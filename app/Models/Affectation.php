@@ -42,7 +42,7 @@ class Affectation extends Model
 
             if ($conflitVehicule || $conflitChauffeur) {
                 throw ValidationException::withMessages([
-                    'affectation' => "Ce véhicule ou ce chauffeur est déjà affecté sur une période en cours.",
+                    'affectation' => 'Ce véhicule ou ce chauffeur est déjà affecté sur une période en cours.',
                 ]);
             }
         });
