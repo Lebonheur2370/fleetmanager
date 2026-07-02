@@ -68,6 +68,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('entretiens', EntretienController::class);
 
         // Epic 5 — Carburant
+        Route::get('pleins/rapport/consommation', [PleinController::class, 'consommation'])
+            ->name('pleins.consommation');
         Route::resource('pleins', PleinController::class);
 
         // Epic 6 — Reporting
