@@ -36,7 +36,7 @@ class VehiculeController extends Controller
         Vehicule::create($request->validated());
 
         return redirect()->route('vehicules.index')
-            ->with('success', "Le véhicule a été ajouté à la liste.");
+            ->with('success', 'Le véhicule a été ajouté à la liste.');
     }
 
     /**
@@ -44,6 +44,10 @@ class VehiculeController extends Controller
      */
     public function show(Vehicule $vehicule)
     {
+        $vehicule->load('affectationActive.chauffeur');
+        $vehicule->loadCount('entretiens');
+        $vehicule->setRelation('entretiensRecents', $vehicule->entretiens()->latest('date_entretien')->take(5)->get());
+
         return view('vehicules.show', compact('vehicule'));
     }
 
@@ -63,7 +67,7 @@ class VehiculeController extends Controller
         $vehicule->update($request->validated());
 
         return redirect()->route('vehicules.index')
-            ->with('success', "Les informations du véhicule ont été mises à jour.");
+            ->with('success', 'Les informations du véhicule ont été mises à jour.');
     }
 
     /**

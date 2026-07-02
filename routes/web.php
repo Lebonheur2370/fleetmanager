@@ -1,8 +1,24 @@
 <?php
 
+use App\Http\Controllers\AffectationController;
+use App\Http\Controllers\ChauffeurController;
+use App\Http\Controllers\ChauffeurEspaceController;
+use App\Http\Controllers\EntretienController;
 use App\Http\Controllers\PasswordChangeController;
+use App\Http\Controllers\PleinController;
+use App\Http\Controllers\RapportController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\VehiculeController;
 use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Route racine — redirige vers le dashboard si connecté, sinon vers le login
+|--------------------------------------------------------------------------
+*/
+Route::get('/', function () {
+    return redirect()->route(auth()->check() ? 'dashboard' : 'login');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -37,27 +53,27 @@ Route::middleware('auth')->group(function () {
         Route::resource('users', UsersController::class)->except(['create', 'store']);
 
         // Epic 1 — Véhicules
-        Route::resource('vehicules', \App\Http\Controllers\VehiculeController::class);
+        Route::resource('vehicules', VehiculeController::class);
 
         // Epic 2 — Chauffeurs (créés par l'admin, identifiants auto-générés)
-        Route::resource('chauffeurs', \App\Http\Controllers\ChauffeurController::class);
+        Route::resource('chauffeurs', ChauffeurController::class);
 
         // Epic 3 — Affectations
-        Route::resource('affectations', \App\Http\Controllers\AffectationController::class)
+        Route::resource('affectations', AffectationController::class)
             ->except(['edit', 'update']);
-        Route::patch('affectations/{affectation}/cloturer', [\App\Http\Controllers\AffectationController::class, 'cloturer'])
+        Route::patch('affectations/{affectation}/cloturer', [AffectationController::class, 'cloturer'])
             ->name('affectations.cloturer');
 
         // Epic 4 — Entretiens
-        Route::resource('entretiens', \App\Http\Controllers\EntretienController::class);
+        Route::resource('entretiens', EntretienController::class);
 
         // Epic 5 — Carburant
-        Route::resource('pleins', \App\Http\Controllers\PleinController::class);
+        Route::resource('pleins', PleinController::class);
 
         // Epic 6 — Reporting
-        Route::get('/rapports/depenses', [\App\Http\Controllers\RapportController::class, 'depenses'])
+        Route::get('/rapports/depenses', [RapportController::class, 'depenses'])
             ->name('rapports.depenses');
-        Route::get('/rapports/kilometrage', [\App\Http\Controllers\RapportController::class, 'kilometrage'])
+        Route::get('/rapports/kilometrage', [RapportController::class, 'kilometrage'])
             ->name('rapports.kilometrage');
     });
 
@@ -67,9 +83,9 @@ Route::middleware('auth')->group(function () {
     |----------------------------------------------------------------------
     */
     Route::middleware('role:chauffeur')->prefix('mon-espace')->name('chauffeur.')->group(function () {
-        Route::get('/affectation', [\App\Http\Controllers\ChauffeurEspaceController::class, 'affectation'])
+        Route::get('/affectation', [ChauffeurEspaceController::class, 'affectation'])
             ->name('affectation');
-        Route::get('/pleins', [\App\Http\Controllers\ChauffeurEspaceController::class, 'pleins'])
+        Route::get('/pleins', [ChauffeurEspaceController::class, 'pleins'])
             ->name('pleins');
     });
 });

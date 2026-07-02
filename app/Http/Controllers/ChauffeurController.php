@@ -75,7 +75,7 @@ class ChauffeurController extends Controller
      */
     public function show(Chauffeur $chauffeur)
     {
-        $chauffeur->load('user');
+        $chauffeur->load(['user', 'affectationActive.vehicule']);
 
         return view('chauffeurs.show', compact('chauffeur'));
     }

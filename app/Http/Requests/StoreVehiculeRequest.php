@@ -30,12 +30,12 @@ class StoreVehiculeRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'immatriculation.required' => "Le champ immatriculation est obligatoire.",
-            'immatriculation.unique' => "Cette immatriculation est déjà enregistrée.",
-            'marque.required' => "La marque est obligatoire.",
-            'modele.required' => "Le modèle est obligatoire.",
-            'kilometrage.required' => "Le kilométrage est obligatoire.",
-            'kilometrage.integer' => "Le kilométrage doit être un nombre entier.",
+            'immatriculation.required' => 'Le champ immatriculation est obligatoire.',
+            'immatriculation.unique' => 'Cette immatriculation est déjà enregistrée.',
+            'marque.required' => 'La marque est obligatoire.',
+            'modele.required' => 'Le modèle est obligatoire.',
+            'kilometrage.required' => 'Le kilométrage est obligatoire.',
+            'kilometrage.integer' => 'Le kilométrage doit être un nombre entier.',
         ];
     }
 }

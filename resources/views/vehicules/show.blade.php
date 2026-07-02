@@ -48,15 +48,40 @@
             <div class="card shadow-sm h-100">
                 <div class="card-body">
                     <h6 class="card-title"><i class="fa-solid fa-user"></i> Affectation actuelle</h6>
-                    <p class="text-muted small mb-0">Disponible à partir du Sprint 2 (Epic 3 — Affectations).</p>
+                    @if($vehicule->affectationActive)
+                        <p class="mb-1">
+                            <a href="{{ route('chauffeurs.show', $vehicule->affectationActive->chauffeur) }}">
+                                {{ $vehicule->affectationActive->chauffeur->nomComplet() }}
+                            </a>
+                        </p>
+                        <p class="text-muted small mb-2">Depuis le {{ $vehicule->affectationActive->date_debut->format('d/m/Y') }}</p>
+                        <a href="{{ route('affectations.show', $vehicule->affectationActive) }}" class="btn btn-sm btn-outline-secondary">
+                            Voir l'affectation
+                        </a>
+                    @else
+                        <p class="text-muted small mb-0">Aucun chauffeur affecté actuellement.</p>
+                    @endif
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card shadow-sm h-100">
                 <div class="card-body">
-                    <h6 class="card-title"><i class="fa-solid fa-screwdriver-wrench"></i> Entretiens</h6>
-                    <p class="text-muted small mb-0">Disponible à partir du Sprint 3 (Epic 4 — Entretiens).</p>
+                    <h6 class="card-title d-flex justify-content-between align-items-center">
+                        <span><i class="fa-solid fa-screwdriver-wrench"></i> Entretiens</span>
+                        <a href="{{ route('entretiens.create') }}" class="btn btn-sm btn-outline-success"><i class="fa-solid fa-plus"></i></a>
+                    </h6>
+                    @forelse($vehicule->entretiensRecents as $entretien)
+                        <div class="d-flex justify-content-between small mb-1">
+                            <a href="{{ route('entretiens.show', $entretien) }}">{{ config("entretiens.types.{$entretien->type}.label", $entretien->type) }}</a>
+                            <span class="text-muted">{{ $entretien->date_entretien->format('d/m/Y') }}</span>
+                        </div>
+                    @empty
+                        <p class="text-muted small mb-0">Aucun entretien enregistré.</p>
+                    @endforelse
+                    @if($vehicule->entretiens_count > 5)
+                        <a href="{{ route('entretiens.index') }}" class="small">Voir les {{ $vehicule->entretiens_count }} entretiens…</a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -64,7 +89,7 @@
             <div class="card shadow-sm h-100">
                 <div class="card-body">
                     <h6 class="card-title"><i class="fa-solid fa-gas-pump"></i> Carburant</h6>
-                    <p class="text-muted small mb-0">Disponible à partir du Sprint 4 (Epic 5 — Carburant).</p>
+                    <p class="text-muted small mb-0">Disponible.</p>
                 </div>
             </div>
         </div>

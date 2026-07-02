@@ -36,12 +36,12 @@ class UpdateVehiculeRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'immatriculation.required' => "Le champ immatriculation est obligatoire.",
-            'immatriculation.unique' => "Cette immatriculation est déjà utilisée par un autre véhicule.",
-            'marque.required' => "La marque est obligatoire.",
-            'modele.required' => "Le modèle est obligatoire.",
-            'kilometrage.required' => "Le kilométrage est obligatoire.",
-            'statut.required' => "Le statut est obligatoire.",
+            'immatriculation.required' => 'Le champ immatriculation est obligatoire.',
+            'immatriculation.unique' => 'Cette immatriculation est déjà utilisée par un autre véhicule.',
+            'marque.required' => 'La marque est obligatoire.',
+            'modele.required' => 'Le modèle est obligatoire.',
+            'kilometrage.required' => 'Le kilométrage est obligatoire.',
+            'statut.required' => 'Le statut est obligatoire.',
         ];
     }
 }
