@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
+| Route racine — redirige vers le dashboard si connecté, sinon vers le login
+|--------------------------------------------------------------------------
+*/
+Route::get('/', function () {
+    return redirect()->route(auth()->check() ? 'dashboard' : 'login');
+});
+
+/*
+|--------------------------------------------------------------------------
 | Epic 0 — Authentification (US0.1, US0.2, US0.3)
 |--------------------------------------------------------------------------
 */
