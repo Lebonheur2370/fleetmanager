@@ -1,0 +1,31 @@
+// Thème FleetManager — vert cohérent avec AG241/Gaboride
+$primary: #22c55e;
+$success: #00bf63;
+$dark: #1e293b;
+$body-bg: #f4f6f8;
+
+@import "bootstrap/scss/bootstrap";
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import "datatables.net-bs5/css/dataTables.bootstrap5.css";
+
+.sidebar {
+    min-height: 100vh;
+    background-color: $dark;
+}
+
+.sidebar .nav-link {
+    color: #cbd5e1;
+}
+
+.sidebar .nav-link.active,
+.sidebar .nav-link:hover {
+    color: #fff;
+    background-color: rgba($primary, 0.15);
+    border-left: 3px solid $primary;
+}
+
+.badge-statut-disponible { background-color: $success; }
+.badge-statut-affecte { background-color: #0d6efd; }
+.badge-statut-en_entretien { background-color: #fd7e14; }
+.badge-statut-hors_service { background-color: #dc3545; }

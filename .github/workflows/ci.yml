@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_DATABASE: fleetmanager_test
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo_mysql, bcmath
+
+      - name: Copier le .env
+        run: cp .env.example .env
+
+      - name: Installer les dépendances Composer
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Générer la clé d'application
+        run: php artisan key:generate
+
+      - name: Installer les dépendances Node
+        run: npm ci
+
+      - name: Build des assets
+        run: npm run build
+
+      - name: Vérifier le style de code (Pint)
+        run: ./vendor/bin/pint --test
+
+      - name: Lancer les migrations
+        run: php artisan migrate --force
+        env:
+          DB_HOST: 127.0.0.1
+          DB_DATABASE: fleetmanager_test
+          DB_USERNAME: root
+          DB_PASSWORD:
+
+      - name: Lancer les tests
+        run: php artisan test
+        env:
+          DB_HOST: 127.0.0.1
+          DB_DATABASE: fleetmanager_test
+          DB_USERNAME: root
+          DB_PASSWORD:
