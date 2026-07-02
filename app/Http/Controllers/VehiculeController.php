@@ -44,6 +44,8 @@ class VehiculeController extends Controller
      */
     public function show(Vehicule $vehicule)
     {
+        $vehicule->load('affectationActive.chauffeur');
+
         return view('vehicules.show', compact('vehicule'));
     }
 

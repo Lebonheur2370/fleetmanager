@@ -51,7 +51,19 @@
             <div class="card shadow-sm h-100">
                 <div class="card-body">
                     <h6 class="card-title"><i class="fa-solid fa-car"></i> Affectation actuelle</h6>
-                    <p class="text-muted small mb-0">Disponible à partir du Sprint 2 (Epic 3 — Affectations).</p>
+                    @if($chauffeur->affectationActive)
+                        <p class="mb-1">
+                            <a href="{{ route('vehicules.show', $chauffeur->affectationActive->vehicule) }}">
+                                {{ $chauffeur->affectationActive->vehicule->immatriculation }}
+                            </a>
+                        </p>
+                        <p class="text-muted small mb-2">Depuis le {{ $chauffeur->affectationActive->date_debut->format('d/m/Y') }}</p>
+                        <a href="{{ route('affectations.show', $chauffeur->affectationActive) }}" class="btn btn-sm btn-outline-secondary">
+                            Voir l'affectation
+                        </a>
+                    @else
+                        <p class="text-muted small mb-0">Aucun véhicule affecté actuellement.</p>
+                    @endif
                 </div>
             </div>
         </div>
