@@ -8,6 +8,12 @@ window.bootstrap = bootstrap;
 
 import 'datatables.net-bs5';
 
+import { Chart } from 'chart.js/auto';
+window.Chart = Chart;
+Chart.defaults.font.family = "'Segoe UI', system-ui, sans-serif";
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.legend.labels.boxWidth = 8;
+
 // Initialisation par défaut des tableaux (utilisé dans les vues liste :
 // véhicules, chauffeurs, affectations, entretiens, pleins)
 window.initDataTable = function (selector, options = {}) {

@@ -3,7 +3,8 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "postinstall": "node scripts/copy-fontawesome-fonts.mjs"
     },
     "devDependencies": {
         "axios": "^1.7.4",
@@ -12,10 +13,11 @@
         "vite": "^5.0"
     },
     "dependencies": {
-        "bootstrap": "^5.3.3",
+        "@fortawesome/fontawesome-free": "^6.6.0",
         "@popperjs/core": "^2.11.8",
-        "jquery": "^3.7.1",
+        "bootstrap": "^5.3.3",
+        "chart.js": "^4.5.1",
         "datatables.net-bs5": "^2.1.4",
-        "@fortawesome/fontawesome-free": "^6.6.0"
+        "jquery": "^3.7.1"
     }
 }

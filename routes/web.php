@@ -3,16 +3,13 @@
 use App\Http\Controllers\AffectationController;
 use App\Http\Controllers\ChauffeurController;
 use App\Http\Controllers\ChauffeurEspaceController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EntretienController;
 use App\Http\Controllers\PasswordChangeController;
 use App\Http\Controllers\PleinController;
 use App\Http\Controllers\RapportController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VehiculeController;
-use App\Models\Affectation;
-use App\Models\Entretien;
-use App\Models\Plein;
-use App\Models\Vehicule;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,19 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/mot-de-passe/changer', [PasswordChangeController::class, 'edit'])->name('password.change');
     Route::put('/mot-de-passe/changer', [PasswordChangeController::class, 'update'])->name('password.update');
 
-    Route::get('/dashboard', function () {
-        if (auth()->user()->isAdmin()) {
-            return view('dashboard.admin', [
-                'nombreVehicules' => Vehicule::count(),
-                'vehiculesDisponibles' => Vehicule::where('statut', 'disponible')->count(),
-                'kilometrageTotal' => Vehicule::sum('kilometrage'),
-                'depensesTotal' => Entretien::sum('cout') + Plein::sum('montant'),
-                'affectationsActives' => Affectation::where('statut', 'active')->count(),
-            ]);
-        }
-
-        return view('dashboard.chauffeur');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     /*
     |----------------------------------------------------------------------
